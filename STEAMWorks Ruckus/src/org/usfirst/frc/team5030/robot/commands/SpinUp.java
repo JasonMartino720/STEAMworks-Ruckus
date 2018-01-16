@@ -19,17 +19,15 @@ public class SpinUp extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.robotmap.LeftShooterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	Robot.robotmap.LeftShooterMotor.changeControlMode(TalonControlMode.Speed);
-    	Robot.robotmap.RightShooterMotor.changeControlMode(TalonControlMode.Follower);
-    	Robot.robotmap.RightShooterMotor.set(Robot.robotmap.LeftShooterMotor.getDeviceID());
-    	Robot.robotmap.RightShooterMotor.reverseOutput(true);
-    	Robot.robotmap.LeftShooterMotor.setNominalClosedLoopVoltage(12.0);
-    	Robot.robotmap.LeftShooterMotor.reverseSensor(true);
-    	Robot.robotmap.LeftShooterMotor.setP(0.5); // 0.25
-    	Robot.robotmap.LeftShooterMotor.setI(0.0001);
-    	Robot.robotmap.LeftShooterMotor.setD(3.0);
-    	Robot.robotmap.LeftShooterMotor.setF(0.06);//0.129
+    	Robot.robotmap.LeftShooterMotor.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 5);
+    	Robot.robotmap.LeftShooterMotor.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 5);
+    	Robot.robotmap.RightShooterMotor.set(com.ctre.phoenix.motorcontrol.ControlMode.Velocity, 5);
+    	Robot.robotmap.RightShooterMotor.setSensorPhase(true);
+    	Robot.robotmap.LeftShooterMotor.setSensorPhase(true);
+    	Robot.robotmap.LeftShooterMotor.config_kP(arg0, arg1, arg2) //0.5
+    	Robot.robotmap.LeftShooterMotor.config_kI(arg0, arg1, arg2)(0.0001); //0.0001
+    	Robot.robotmap.LeftShooterMotor.config_kD(arg0, arg1, arg2)(3.0); //3.0
+    	Robot.robotmap.LeftShooterMotor.config_kF(arg0, arg1, arg2)(0.06);//0.06
     	
     }
 

@@ -2,8 +2,6 @@ package org.usfirst.frc.team5030.robot.commands;
 
 import org.usfirst.frc.team5030.robot.Robot;
 
-import com.ctre.CANTalon.FeedbackDevice;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -19,11 +17,10 @@ public class Auto_GearLeftPeg extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.robotmap.BLSRX.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	Robot.robotmap.BRSRX.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	Robot.robotmap.BLSRX.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 5);
+    	Robot.robotmap.BRSRX.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 5);
     	//Robot.robotmap.BLSRX.reverseOutput(true);
-    	Robot.robotmap.BRSRX.setEncPosition(0);
-    	Robot.robotmap.BLSRX.setEncPosition(0);
+    	
     	//openServos = new CG_OpenServos();
     	Robot.robotmap.gearMechanismServo.setAngle(0);
     	
@@ -33,8 +30,8 @@ public class Auto_GearLeftPeg extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double rEnc = Robot.robotmap.BRSRX.getEncPosition();
-     	double lEnc = -Robot.robotmap.BLSRX.getEncPosition();
+    	double rEnc = Robot.robotmap.BRSRX.getActiveTrajectoryPosition();
+     	double lEnc = -Robot.robotmap.BLSRX.getActiveTrajectoryPosition();
     	System.out.println("REnc " + rEnc);
     	System.out.println("lEnc " + lEnc);
      	if(lEnc < 7300 && rEnc < 7300)

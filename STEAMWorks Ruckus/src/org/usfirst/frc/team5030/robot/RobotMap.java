@@ -2,8 +2,7 @@ package org.usfirst.frc.team5030.robot;
 
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Spark;
-import com.ctre.CANTalon;
-
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Relay;
@@ -13,30 +12,30 @@ public class RobotMap
 {
 	//Front Talon in the left transmission ID = 0
 	
-	public CANTalon FLSRX;
+	public TalonSRX FLSRX;
 		
 		
 	//Back Talon in the left transmission ID = 1
 		
-	public CANTalon BLSRX;
+	public TalonSRX BLSRX;
 		
 		
 	//Front Talon in the right transmission ID = 2
 		
-	public CANTalon FRSRX;
+	public TalonSRX FRSRX;
 		
 		
 	//Back Talon in the right transmission ID = 3
 		
-	public CANTalon BRSRX;
+	public TalonSRX BRSRX;
 		
 		
 	//Talon SRX for the Right Shooter Motor ID = 4
 		
-	public CANTalon LeftShooterMotor;
+	public TalonSRX LeftShooterMotor;
 	
 	//Talon SRX for the Left Shooter Motor ID = 5
-	public CANTalon RightShooterMotor;
+	public TalonSRX RightShooterMotor;
 	
 	//Talon SR for the climber
 	final int climber = 1;
@@ -65,16 +64,14 @@ public class RobotMap
 	
 	public DoubleSolenoid shifterSolenoid = new DoubleSolenoid(0,1);
 	
-		
-	
 	public RobotMap()
 	{
-		FLSRX = new CANTalon(0);
-		BLSRX = new CANTalon(1);
-		FRSRX = new CANTalon(2);
-		BRSRX = new CANTalon(3);
-		LeftShooterMotor = new CANTalon(4);
-		RightShooterMotor = new CANTalon(5);
+		FLSRX = new TalonSRX(0);
+		BLSRX = new TalonSRX(1);
+		FRSRX = new TalonSRX(2);
+		BRSRX = new TalonSRX(3);
+		LeftShooterMotor = new TalonSRX(4);
+		RightShooterMotor = new TalonSRX(5);
 		
 	}
 	

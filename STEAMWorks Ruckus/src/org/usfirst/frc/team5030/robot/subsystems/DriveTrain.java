@@ -4,21 +4,22 @@ import org.usfirst.frc.team5030.robot.OI;
 //import org.usfirst.frc.team5030.robot.OI;
 import org.usfirst.frc.team5030.robot.Robot;
 import org.usfirst.frc.team5030.robot.commands.JoystickOperation;
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import com.ctre.phoenix.motorcontrol.*;
 
 
 public class DriveTrain extends Subsystem
 {
-	public static RobotDrive drive;
+	public static DifferentialDrive drive;
 	final double driverBands = 0.08;
 	
 	//Right Encoder Velocity
-	double rEncV = Robot.robotmap.BRSRX.getEncVelocity();
+	double rEncV = Robot.robotmap.BRSRX.getActiveTrajectoryVelocity();
 	//Left Encoder Velocity
- 	double lEncV = -Robot.robotmap.BLSRX.getEncVelocity();
+ 	double lEncV = -Robot.robotmap.BLSRX.getActiveTrajectoryVelocity();
  	//Encoder Upshift Velocity
  	final int peakUpshiftV = 3000;
  	//Encoder Downshift V
@@ -30,9 +31,12 @@ public class DriveTrain extends Subsystem
  	
  	//public boolean isAutomaticEnabled;
 		
+ 	SpeedControllerGroup leftDriveGroup = new SpeedControllerGroup(Robot.robotmap.FLSRX, Robot.robotmap.BLSRX);
+ 	SpeedControllerGroup rightDriveGroup = new SpeedControllerGroup(Robot.robotmap.FRSRX, Robot.robotmap.BRSRX);
+ 	
 	public DriveTrain()
 	{
-		drive = new RobotDrive(Robot.robotmap.FLSRX, Robot.robotmap.BLSRX, Robot.robotmap.FRSRX, Robot.robotmap.BRSRX);
+		drive = new DifferentialDrive(leftDriveGroup, rightDriveGroup);
 		drive.setExpiration(1.0);
 	}
 	public void tankDrive(double leftJoy , double rightJoy)

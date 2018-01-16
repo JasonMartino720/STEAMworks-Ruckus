@@ -1,10 +1,7 @@
 package org.usfirst.frc.team5030.robot.commands;
 
 import org.usfirst.frc.team5030.robot.Robot;
-
-import com.ctre.CANTalon.FeedbackDevice;
-import com.ctre.CANTalon.TalonControlMode;
-
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -41,8 +38,8 @@ public class ShootSequence extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.robotmap.LeftShooterMotor.changeControlMode(TalonControlMode.PercentVbus);
-    	Robot.robotmap.RightShooterMotor.changeControlMode(TalonControlMode.PercentVbus);
+    	Robot.robotmap.LeftShooterMotor.set(com.ctre.phoenix.motorcontrol.ControlMode.MotionProfile.PercentOutput, 0);
+    	Robot.robotmap.RightShooterMotor.set(com.ctre.phoenix.motorcontrol.ControlMode.MotionProfile.PercentOutput, 0);
     	Robot.shooter.AllOff();
     }
 

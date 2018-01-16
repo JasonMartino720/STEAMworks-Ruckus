@@ -1,10 +1,6 @@
 package org.usfirst.frc.team5030.robot.commands;
 
 import org.usfirst.frc.team5030.robot.Robot;
-
-import com.ctre.CANTalon.FeedbackDevice;
-import com.ctre.CANTalon.TalonControlMode;
-
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -28,22 +24,20 @@ public class Auto_HopperBlue extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.robotmap.LeftShooterMotor.changeControlMode(TalonControlMode.Speed);
+    	Robot.robotmap.LeftShooterMotor.selectProfileSlot(, 0);
     	Robot.robotmap.RightShooterMotor.changeControlMode(TalonControlMode.Follower);
-    	Robot.robotmap.RightShooterMotor.set(Robot.robotmap.LeftShooterMotor.getDeviceID());
-    	Robot.robotmap.RightShooterMotor.reverseOutput(true);
-    	Robot.robotmap.LeftShooterMotor.setNominalClosedLoopVoltage(12.0);
-    	Robot.robotmap.LeftShooterMotor.reverseSensor(true);
-    	Robot.robotmap.LeftShooterMotor.setP(0.60);
-    	Robot.robotmap.LeftShooterMotor.setI(0.000);
-    	Robot.robotmap.LeftShooterMotor.setD(2.0);
-    	Robot.robotmap.LeftShooterMotor.setF(0.15);
+    	Robot.robotmap.RightShooterMotor.setSensorPhase(true);
+    	Robot.robotmap.LeftShooterMotor.setSensorPhase(true);
+    	Robot.robotmap.LeftShooterMotor.config_kP(0, 0.60, 10);
+    	Robot.robotmap.LeftShooterMotor.config_kI(0, 0.000, 10);
+    	Robot.robotmap.LeftShooterMotor.config_kD(0, 2.0, 10);
+    	Robot.robotmap.LeftShooterMotor.config_kF(0, 0.15, 10);
     	Robot.robotmap.LeftShooterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	Robot.robotmap.BLSRX.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	Robot.robotmap.BRSRX.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	//Robot.robotmap.BLSRX.reverseOutput(true);
-    	Robot.robotmap.BRSRX.setEncPosition(0);
-    	Robot.robotmap.BLSRX.setEncPosition(0);
+    	Robot.robotmap.BRSRX.setSelectedSensorPosition(0, 0, 10);
+    	Robot.robotmap.BLSRX.setSelectedSensorPosition(0, 0, 10);
     	openServos = new CG_OpenServos();
     	openServos.start();
     	setTimeout(14.9);

@@ -2,9 +2,6 @@ package org.usfirst.frc.team5030.robot.commands;
 
 import org.usfirst.frc.team5030.robot.OI;
 import org.usfirst.frc.team5030.robot.Robot;
-
-import com.ctre.CANTalon.FeedbackDevice;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -19,8 +16,8 @@ public class JoystickOperation extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.robotmap.BLSRX.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	Robot.robotmap.FLSRX.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	Robot.robotmap.BLSRX.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 5);
+    	Robot.robotmap.FLSRX.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 5);
 
     	    }
 
