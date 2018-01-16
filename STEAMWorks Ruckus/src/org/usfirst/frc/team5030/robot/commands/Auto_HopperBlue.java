@@ -32,9 +32,9 @@ public class Auto_HopperBlue extends Command {
     	Robot.robotmap.LeftShooterMotor.config_kI(0, 0.000, 10);
     	Robot.robotmap.LeftShooterMotor.config_kD(0, 2.0, 10);
     	Robot.robotmap.LeftShooterMotor.config_kF(0, 0.15, 10);
-    	Robot.robotmap.LeftShooterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	Robot.robotmap.BLSRX.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	Robot.robotmap.BRSRX.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	Robot.robotmap.LeftShooterMotor.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 5);
+    	Robot.robotmap.BLSRX.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 5);
+    	Robot.robotmap.BRSRX.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0, 5);
     	//Robot.robotmap.BLSRX.reverseOutput(true);
     	Robot.robotmap.BRSRX.setSelectedSensorPosition(0, 0, 10);
     	Robot.robotmap.BLSRX.setSelectedSensorPosition(0, 0, 10);
@@ -46,8 +46,8 @@ public class Auto_HopperBlue extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double rEnc = Robot.robotmap.BRSRX.getEncPosition();
-     	double lEnc = -Robot.robotmap.BLSRX.getEncPosition();
+    	double rEnc = Robot.robotmap.BRSRX.getActiveTrajectoryPosition();
+     	double lEnc = -Robot.robotmap.BLSRX.getActiveTrajectoryPosition();
      	
 
  		if(!isFinished)
